@@ -74,7 +74,7 @@ void insertAtPosition(Node*& head, const string& data, int pos) {
 
 void deleteAtBeginning(Node*& head) {
     if (head == nullptr) {
-        cout << "List anda kosong.\n";
+        cout << "\nList anda kosong.\n";
         return;
     }
     Node* temp = head;
@@ -85,7 +85,7 @@ void deleteAtBeginning(Node*& head) {
 
 void deleteAtEnd(Node*& head) {
     if (head == nullptr) {
-        cout << "List anda kosong.\n";
+        cout << "\nList anda kosong.\n";
         return;
     }
     Node* temp = head;
@@ -101,7 +101,7 @@ void deleteAtEnd(Node*& head) {
 
 void deleteAtPosition(Node*& head, int pos) {
     if (head == nullptr) {
-        cout << "List anda kosong.\n";
+        cout << "\nList anda kosong.\n";
         return;
     }
     int count = countNodes(head);
@@ -128,7 +128,7 @@ void printListForward(Node* head) {
     int i = 1;
     Node* temp = head;
     if (temp == nullptr) {
-        cout << "List anda kosong.\n";
+        cout << "\nList anda kosong.\n";
         return;
     }
     cout << "\nList kegiatan: \n";
@@ -143,11 +143,11 @@ void printListReverse(Node* head) {
     int i = countNodes(head);
     Node* temp = head;
     if (temp == nullptr) {
-        cout << "List anda kosong.\n";
+        cout << "\nList anda kosong.\n";
         return;
     }
     while (temp->next != nullptr) temp = temp->next;
-    cout << "List kegiatan (terbalik): \n";
+    cout << "\nList kegiatan (terbalik): \n";
     while (temp != nullptr) {
         cout << i << ". " << temp->data << "\n";
         temp = temp->prev;
@@ -178,6 +178,11 @@ int main() {
                     cout << "3. Pilih posisi custom\n";
                     cout << "\nOpsi anda: ";
                     cin >> addOpt;
+
+                    if(addOpt < 1 || addOpt > 3){
+                        cout << "\nOpsi tidak valid!\n";
+                    }
+
                 } while(addOpt < 1 || addOpt > 3);
 
                 if (addOpt == 3) {
@@ -223,6 +228,10 @@ int main() {
                     cout << "3. Pilih posisi custom\n";
                     cout << "\nOpsi anda: ";
                     cin >> delOpt;
+
+                    if(delOpt < 1 || delOpt > 3){
+                        cout << "\nOpsi tidak valid!\n";
+                    }
                 } while(delOpt < 1 || delOpt > 3);
 
                 if (delOpt == 3) {
@@ -260,7 +269,11 @@ int main() {
                     cout << "2. Terbalik\n";
                     cout << "\nOpsi yang diinginkan: ";
                     cin >> printOpt;
-                } while(printOpt < 1 || printOpt > 3);
+
+                    if(printOpt < 1 || printOpt > 2){
+                        cout << "\nOpsi tidak valid!\n";
+                    }
+                } while(printOpt < 1 || printOpt > 2);
 
                 switch (printOpt) {
                     case 1:
@@ -277,7 +290,6 @@ int main() {
                         
                 }
 
-        
                 break;
 
             case 4:
