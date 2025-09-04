@@ -221,45 +221,50 @@ int main() {
                 break;
 
             case 2:
-                do{
-                    cout << "\nOpsi penghapusan kegiatan yang tersedia: \n";
-                    cout << "1. Awal list\n";
-                    cout << "2. Akhir list\n";
-                    cout << "3. Pilih posisi custom\n";
-                    cout << "\nOpsi anda: ";
-                    cin >> delOpt;
+                if(head == nullptr){
+                    cout << "\nList kosong, tidak ada yang bisa dihapus\n";
+                } else{
+                    do{
+                        cout << "\nOpsi penghapusan kegiatan yang tersedia: \n";
+                        cout << "1. Awal list\n";
+                        cout << "2. Akhir list\n";
+                        cout << "3. Pilih posisi custom\n";
+                        cout << "\nOpsi anda: ";
+                        cin >> delOpt;
 
-                    if(delOpt < 1 || delOpt > 3){
-                        cout << "\nOpsi tidak valid!\n";
-                    }
-                } while(delOpt < 1 || delOpt > 3);
-
-                if (delOpt == 3) {
-                    count = countNodes(head);
-                    do {
-                        cout << "\nPosisi yang diinginkan: ";
-                        cin >> pos;
-                        if (pos < 1 || pos > count) {
-                            cout << "Posisi tidak valid!\n";
-                            pos = 0;
+                        if(delOpt < 1 || delOpt > 3){
+                            cout << "\nOpsi tidak valid!\n";
                         }
-                    } while (pos < 1 || pos > count);
+                    } while(delOpt < 1 || delOpt > 3);
+
+                    if (delOpt == 3) {
+                        count = countNodes(head);
+                        do {
+                            cout << "\nPosisi yang diinginkan: ";
+                            cin >> pos;
+                            if (pos < 1 || pos > count) {
+                                cout << "Posisi tidak valid!\n";
+                                pos = 0;
+                            }
+                        } while (pos < 1 || pos > count);
+                    }
+
+                    switch (delOpt) {
+                        case 1:
+                            deleteAtBeginning(head);
+                            break;
+                        case 2:
+                            deleteAtEnd(head);
+                            break;
+                        case 3:
+                            deleteAtPosition(head, pos);
+                            break;
+                        default:
+                            cout << "Opsi tidak valid!\n";
+                            break;
+                    }
                 }
 
-                switch (delOpt) {
-                    case 1:
-                        deleteAtBeginning(head);
-                        break;
-                    case 2:
-                        deleteAtEnd(head);
-                        break;
-                    case 3:
-                        deleteAtPosition(head, pos);
-                        break;
-                    default:
-                        cout << "Opsi tidak valid!\n";
-                        break;
-                }
                 break;
 
             case 3:
