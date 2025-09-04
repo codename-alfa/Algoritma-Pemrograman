@@ -153,7 +153,6 @@ void printListReverse(Node* head) {
         temp = temp->prev;
         i--;
     }
-    cout << endl;
 }
 
 int main() {
@@ -167,22 +166,24 @@ int main() {
         cout << "2. Menghapus kegiatan tertentu\n";
         cout << "3. Menampilkan semua list kegiatan\n";
         cout << "4. Keluar dari program\n";
-        cout << "Opsi anda: ";
+        cout << "\nOpsi anda: ";
         cin >> mainOpt;
 
         switch (mainOpt) {
             case 1:
-                cout << "\nOpsi penambahan kegiatan yang tersedia: \n";
-                cout << "1. Awal list\n";
-                cout << "2. Akhir list\n";
-                cout << "3. Pilih posisi custom\n";
-                cout << "Opsi anda: ";
-                cin >> addOpt;
+                do{
+                    cout << "\nOpsi penambahan kegiatan yang tersedia: \n";
+                    cout << "1. Awal list\n";
+                    cout << "2. Akhir list\n";
+                    cout << "3. Pilih posisi custom\n";
+                    cout << "\nOpsi anda: ";
+                    cin >> addOpt;
+                } while(addOpt < 1 || addOpt > 3);
 
                 if (addOpt == 3) {
                     count = countNodes(head);
                     do {
-                        cout << "Masukkan posisi yang diinginkan: ";
+                        cout << "\nPosisi yang diinginkan: ";
                         cin >> pos;
                         if (pos < 1 || pos > (count + 1)) {
                             cout << "Posisi tidak valid!\n";
@@ -191,11 +192,11 @@ int main() {
                     } while (pos < 1 || pos > (count + 1));
                 }
 
-                cout << "\nMasukkan kegiatan yang ingin ditambahkan: ";
+                cout << "\nKegiatan yang ingin ditambahkan: ";
                 getline(cin >> ws, act);
 
                 if (act.empty()) {
-                    cout << "Kegiatan kosong, batal menambahkan.\n";
+                    cout << "\nKegiatan kosong, batal menambahkan.\n";
                 } else {
                     switch (addOpt) {
                         case 1:
@@ -215,17 +216,19 @@ int main() {
                 break;
 
             case 2:
-                cout << "\nOpsi penghapusan kegiatan yang tersedia: \n";
-                cout << "1. Awal list\n";
-                cout << "2. Akhir list\n";
-                cout << "3. Pilih posisi custom\n";
-                cout << "Opsi anda: ";
-                cin >> delOpt;
+                do{
+                    cout << "\nOpsi penghapusan kegiatan yang tersedia: \n";
+                    cout << "1. Awal list\n";
+                    cout << "2. Akhir list\n";
+                    cout << "3. Pilih posisi custom\n";
+                    cout << "\nOpsi anda: ";
+                    cin >> delOpt;
+                } while(delOpt < 1 || delOpt > 3);
 
                 if (delOpt == 3) {
                     count = countNodes(head);
                     do {
-                        cout << "Masukkan posisi yang diinginkan: ";
+                        cout << "\nPosisi yang diinginkan: ";
                         cin >> pos;
                         if (pos < 1 || pos > count) {
                             cout << "Posisi tidak valid!\n";
@@ -251,12 +254,13 @@ int main() {
                 break;
 
             case 3:
-                cout << "Opsi tampilan list yang tersedia: \n";
-                cout << "1. Normal\n";
-                cout << "2. Terbalik\n";
-
-                cout << "Masukkan opsi yang diinginkan: ";
-                cin >> printOpt;
+                do{
+                    cout << "\nOpsi tampilan list yang tersedia: \n";
+                    cout << "1. Normal\n";
+                    cout << "2. Terbalik\n";
+                    cout << "\nOpsi yang diinginkan: ";
+                    cin >> printOpt;
+                } while(printOpt < 1 || printOpt > 3);
 
                 switch (printOpt) {
                     case 1:
