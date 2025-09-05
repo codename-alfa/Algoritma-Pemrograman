@@ -1,134 +1,66 @@
 #include <iostream>
 #include <string>
+#include <list>
 using namespace std;
 
-class Node {
-public:
-    string data;
-    Node* next;
-    Node* prev;
-    Node(const string& data) {
-        this->data = data;
-        this->next = nullptr;
-        this->prev = nullptr;
-    }
-};
-
-int countNodes(Node* head) {
-    int count = 0;
-    Node* temp = head;
-    while (temp != nullptr) {
-        count++;
-        temp = temp->next;
-    }
-    return count;
+int countNodes(const list<string>& acts) {
+    return acts.size();
 }
 
-void insertAtBeginning(Node*& head, const string& data) {
-    Node* newNode = new Node(data);
-    if (head == nullptr) {
-        head = newNode;
-        return;
-    }
-    newNode->next = head;
-    head->prev = newNode;
-    head = newNode;
+void insertAtBeginning(list<string>& acts, const string& data) {
+    acts.push_front(data);
 }
 
-void insertAtEnd(Node*& head, const string& data) {
-    Node* newNode = new Node(data);
-    if (head == nullptr) {
-        head = newNode;
-        return;
-    }
-    Node* temp = head;
-    while (temp->next != nullptr) {
-        temp = temp->next;
-    }
-    temp->next = newNode;
-    newNode->prev = temp;
+void insertAtEnd(list<string>& acts, const string& data) {
+    acts.push_back(data);
 }
 
-void insertAtPosition(Node*& head, const string& data, int pos) {
-    int count = countNodes(head);
+void insertAtPosition(list<string>& acts, const string& data, int pos) {
+    int count = countNodes(acts);
     if (pos < 1 || pos > count + 1) {
         cout << "Posisi invalid!\n";
         return;
     }
-    if (pos == 1) {
-        insertAtBeginning(head, data);
-        return;
-    }
-    Node* newNode = new Node(data);
-    Node* temp = head;
-    for (int i = 1; temp != nullptr && i < pos - 1; i++) {
-        temp = temp->next;
-    }
-    newNode->next = temp->next;
-    newNode->prev = temp;
-    if (temp->next != nullptr) {
-        temp->next->prev = newNode;
-    }
-    temp->next = newNode;
+    auto i = acts.begin();
+    advance(i, pos - 1);
+    acts.insert(i, data);
 }
 
-void deleteAtBeginning(Node*& head) {
-    Node* temp = head;
-    head = head->next;
-    if (head != nullptr) head->prev = nullptr;
-    delete temp;
+void deleteAtBeginning(list<string>& acts) {
+    acts.pop_front();
 }
 
-void deleteAtEnd(Node*& head) {
-    Node* temp = head;
-    if (temp->next == nullptr) {
-        head = nullptr;
-        delete temp;
-        return;
-    }
-    while (temp->next != nullptr) temp = temp->next;
-    temp->prev->next = nullptr;
-    delete temp;
+void deleteAtEnd(list<string>& acts) {
+    acts.pop_back();
 }
 
-void deleteAtPosition(Node*& head, int pos) {
-    int count = countNodes(head);
-    if (pos == 1) {
-        deleteAtBeginning(head);
-        return;
-    }
-    Node* temp = head;
-    for (int i = 1; temp != nullptr && i < pos; i++) temp = temp->next;
-    if (temp->next != nullptr) temp->next->prev = temp->prev;
-    if (temp->prev != nullptr) temp->prev->next = temp->next;
-    delete temp;
+void deleteAtPosition(list<string>& acts, int pos) {
+    int count = countNodes(acts);
+    auto i = acts.begin();
+    advance(i, pos - 1);
+    acts.erase(i);
 }
 
-void printListForward(Node* head) {
-    int i = 1;
-    Node* temp = head;
+void printListForward(const list<string>& acts) {
     cout << "\nList kegiatan: \n";
-    while (temp != nullptr) {
-        cout << i << ". " << temp->data << "\n";
-        temp = temp->next;
+    int i = 1;
+    for (const auto& acts : acts) {
+        cout << i << ". " << acts << "\n";
         i++;
     }
 }
 
-void printListReverse(Node* head) {
-    int i = countNodes(head);
-    Node* temp = head;
-    while (temp->next != nullptr) temp = temp->next;
+void printListReverse(const list<string>& acts) {
     cout << "\nList kegiatan (terbalik): \n";
-    while (temp != nullptr) {
-        cout << i << ". " << temp->data << "\n";
-        temp = temp->prev;
+    int i = acts.size();
+    for (auto j = acts.rbegin(); j != acts.rend(); ++j) {
+        cout << i << ". " << *j << "\n";
         i--;
     }
 }
 
 int main() {
-    Node* head = nullptr;
+    list<string> acts;
     int mainOpt = 0, pos = 0, addOpt = 0, delOpt = 0, printOpt = 0, count = 0;
     string act;
     cout << "=== Activity Organizer ===\n";
@@ -158,7 +90,7 @@ int main() {
                 } while(addOpt < 1 || addOpt > 3);
 
                 if (addOpt == 3) {
-                    count = countNodes(head);
+                    count = countNodes(acts);
                     do {
                         cout << "\nPosisi yang diinginkan: ";
                         cin >> pos;
@@ -177,13 +109,13 @@ int main() {
                 } else {
                     switch (addOpt) {
                         case 1:
-                            insertAtBeginning(head, act);
+                            insertAtBeginning(acts, act);
                             break;
                         case 2:
-                            insertAtEnd(head, act);
+                            insertAtEnd(acts, act);
                             break;
                         case 3:
-                            insertAtPosition(head, act, pos);
+                            insertAtPosition(acts, act, pos);
                             break;
                         default:
                             cout << "Opsi tidak valid!\n";
@@ -193,7 +125,7 @@ int main() {
                 break;
 
             case 2:
-                if(head == nullptr){
+                if(acts.empty()){
                     cout << "\nList kosong, tidak ada yang bisa dihapus\n";
                 } else{
                     do{
@@ -210,7 +142,7 @@ int main() {
                     } while(delOpt < 1 || delOpt > 3);
 
                     if (delOpt == 3) {
-                        count = countNodes(head);
+                        count = countNodes(acts);
                         do {
                             cout << "\nPosisi yang diinginkan: ";
                             cin >> pos;
@@ -223,13 +155,13 @@ int main() {
 
                     switch (delOpt) {
                         case 1:
-                            deleteAtBeginning(head);
+                            deleteAtBeginning(acts);
                             break;
                         case 2:
-                            deleteAtEnd(head);
+                            deleteAtEnd(acts);
                             break;
                         case 3:
-                            deleteAtPosition(head, pos);
+                            deleteAtPosition(acts, pos);
                             break;
                         default:
                             cout << "Opsi tidak valid!\n";
@@ -240,8 +172,8 @@ int main() {
                 break;
 
             case 3:
-                if(head == nullptr){
-                        cout << "\nList kosong\n";
+            if(acts.empty()){
+                    cout << "\nList kosong\n";
                 } else{
                     do{
                         cout << "\nOpsi tampilan list yang tersedia: \n";
@@ -257,11 +189,11 @@ int main() {
 
                     switch (printOpt) {
                         case 1:
-                            printListForward(head);
+                            printListForward(acts);
                             break;
 
                         case 2:
-                            printListReverse(head);
+                            printListReverse(acts);
                             break;
 
                         default:
@@ -283,6 +215,6 @@ int main() {
         }
     } while (mainOpt != 4);
 
-    while (head) deleteAtBeginning(head);
+    acts.clear();
     return 0;
 }
