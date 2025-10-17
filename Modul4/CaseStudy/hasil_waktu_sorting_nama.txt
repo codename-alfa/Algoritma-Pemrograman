@@ -1,0 +1,27 @@
+========================================
+SKENARIO 1: AVERAGE CASE (NAMA ACAK) - ASCENDING
+========================================
+Merge Sort Ascending (Random): 21.3504 ms
+Quick Sort Lomuto Ascending (Random): 1.6731 ms
+Quick Sort Hoare Ascending (Random): 1.7855 ms
+
+========================================
+SKENARIO 1b: AVERAGE CASE (NAMA ACAK) - DESCENDING
+========================================
+Merge Sort Descending (Random): 34.8281 ms
+Quick Sort Lomuto Descending (Random): 1.5278 ms
+Quick Sort Hoare Descending (Random): 1.4635 ms
+
+========================================
+SKENARIO 2: BEST/WORST CASE (NAMA TERURUT) - ASCENDING
+========================================
+Merge Sort Ascending (Sorted): 24.0924 ms
+Quick Sort Lomuto Ascending (Sorted): 53.4155 ms
+Quick Sort Hoare Ascending (Sorted): 47.6116 ms
+
+========================================
+SKENARIO 2b: BEST/WORST CASE (NAMA TERURUT) - DESCENDING
+========================================
+Merge Sort Descending (Sorted): 33.4093 ms
+Quick Sort Lomuto Descending (Sorted): 71.4544 ms
+Quick Sort Hoare Descending (Sorted): 49.283 ms

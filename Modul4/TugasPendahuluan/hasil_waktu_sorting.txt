@@ -1,0 +1,13 @@
+========================================
+SKENARIO 1: AVERAGE CASE (DATA ACAK)
+========================================
+Merge Sort (Random): 45.5394 ms
+Quick Sort Lomuto (Random): 7.746 ms
+Quick Sort Hoare (Random): 7.0444 ms
+
+========================================
+SKENARIO 2: WORST CASE (DATA TERURUT)
+========================================
+Merge Sort (Sorted): 3.9851 ms
+Quick Sort Lomuto (Sorted): 61.8522 ms
+Quick Sort Hoare (Sorted): 12.4396 ms
